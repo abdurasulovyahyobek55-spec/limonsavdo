@@ -1,8 +1,8 @@
 // Knowledge Base for the Expert System
 const knowledgeBase = {
-    suv: "Limon namlikni yaxshi ko'radi. Yozda har kuni kechqurun, qishda esa tuproq namligiga qarab haftada 1-2 marta sug'orish tavsiya etiladi. Suv iliq bo'lishi muhim.",
-    ogit: "Azotli va fosforli o'g'itlar limon uchun juda muhim. Bahorda go'ng, yoz davomida esa mineral o'g'itlar (NPK) bilan oziqlantiring. Bargidan oziqlantirish ham yaxshi samara beradi.",
-    kasallik: "Limon barglarida sarg'ayish bo'lsa, bu temir yetishmovchiligi (xloroz) bo'lishi mumkin. O'rgimchak kana va shira tushishidan ehtiyot bo'ling. Profilaktika uchun Bordo suyuqligidan foydalaning.",
+    suv: "Limon namlikni yaxshi ko'radi. Yozda tuproq holatidan kelib chiqib haftada 1-2 marta , qishda mavsumida chilla suvi beriladi yer namligiga qarab. ",
+    ogit: "Azotli va fosforli o'g'itlar limon uchun juda muhim. Bahorda go'ng, yoz davomida esa mineral o'g'itlar bilan oziqlantiring. Bargidan oziqlantirish ham yaxshi samara beradi.",
+    kasallik: "Limon barglarida sarg'ayish bo'lsa, bu temir yetishmovchiligi (xloroz) bo'lishi mumkin. O'rgimchak kana va shira tushishidan ehtiyot bo'ling. Profilaktika uchun Bordo suyuqligidan foydalaning.Yoz mavsumida bargiga tushadiga rassom qurtga qarshi VERTIMEK preparadi yaxshi samara beradi.",
     harorat: "Limon subtropik o'simlik. Qishda harorat +5 gradusdan tushib ketmasligi kerak. Eng qulay harorat +18...+25 daraja. Sovuq urishidan asrash uchun qishda issiqxonani yaxshilab yoping.",
     default: "Uzr, bu savolga aniq javob topa olmadim. Iltimos, savolingizni boshqacha shakllantiring yoki biz bilan bog'laning: +998 94 170 68 79 / +998 93 101 68 79"
 };
@@ -283,3 +283,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
