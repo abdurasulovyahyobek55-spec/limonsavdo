@@ -1,92 +1,81 @@
 <!DOCTYPE html>
 <html lang="uz">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sotuvchi Kabineti | LimonSavdo</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-
-<body>
-
-    <!-- Login Section -->
-    <div id="loginSection" class="container">
-        <div class="login-container">
-            <h2 style="margin-bottom: 20px;">Tizimga Kirish</h2>
-            <div class="login-form">
-                <input type="password" id="adminPassword" placeholder="Parolni kiriting">
-                <button class="btn btn-primary" style="width: 100%" onclick="adminLogin()">Kirish</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Dashboard Section (Hidden by default) -->
-    <div id="dashboardSection" style="display: none;">
-        <header class="admin-header">
-            <div class="container admin-nav">
-                <h2><i class="fa-solid fa-lemon"></i> Sotuvchi Kabineti</h2>
-                <button class="btn btn-sm" style="width: auto; margin:0;" onclick="logout()">Chiqish</button>
-            </div>
-        </header>
-
-        <div class="container">
-            <div class="dashboard-grid">
-                <!-- Add Product Card -->
-                <div class="upload-card">
-                    <h3 style="margin-bottom: 20px;">Yangi Limon Ko'chati Qo'shish</h3>
-
-                    <div class="form-group">
-                        <label>Rasm Yuklash</label>
-                        <div class="image-preview" id="imagePreview"
-                            onclick="document.getElementById('productImage').click()" style="cursor: pointer;">
-                            <i class="fa-solid fa-cloud-arrow-up"></i>
-                        </div>
-                        <input type="file" id="productImage" accept="image/*" style="display: none"
-                            onchange="previewImage(this)">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Mahsulot Nomi</label>
-                        <input type="text" id="productName" placeholder="Masalan: 2 yillik hosildor ko'chat">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Tavsif va Holati</label>
-                        <textarea id="productDesc" rows="4"
-                            placeholder="Ko'chatning holati, bo'yi, yoshi va afzalliklari haqida yozing..."></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Narxi (ixtiyoriy, mijozga ko'rinmaydi, faqat ma'lumot uchun)</label>
-                        <input type="text" id="productPrice" placeholder="Narx">
-                    </div>
-
-                    <button class="btn btn-primary" onclick="addProduct()">E'lonni Joylash</button>
-                </div>
-
-                <!-- Product List -->
-                <div class="upload-card">
-                    <h3 style="margin-bottom: 20px;">Mening E'lonlarim</h3>
-                    <div id="adminProductList" class="products-grid">
-                        <!-- Products will appear here -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
-    <script>
-        // Check if already logged in
-        if (localStorage.getItem('isAdmin') === 'true') {
-            document.getElementById('loginSection').style.display = 'none';
-            document.getElementById('dashboardSection').style.display = 'block';
-            loadAdminProducts();
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        .admin-container { padding-top: 100px; min-height: 100vh; }
+        .upload-card { background: var(--white); padding: 2rem; border-radius: 24px; box-shadow: var(--shadow); }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
+        .form-group input, .form-group textarea {
+            width: 100%; padding: 0.8rem; border: 1px solid #e2e8f0; border-radius: 12px; font-family: inherit;
         }
-    </script>
-</body>
+        .image-preview {
+            width: 100%; height: 200px; border: 2px dashed #e2e8f0; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center; cursor: pointer; overflow: hidden;
+        }
+        .image-preview img { width: 100%; height: 100%; object-fit: cover; }
+    </style>
+</head>
+<body>
+    <nav class="navbar scrolled">
+        <div class="container nav-container">
+            <a href="/" class="logo"><i class="fa-solid fa-lemon"></i> LimonSavdo</a>
+            <button id="logoutBtn" class="btn btn-sm btn-secondary">Chiqish</button>
+        </div>
+    </nav>
 
+    <div class="container admin-container">
+        <div id="loginSection" class="glass" style="max-width: 400px; margin: 4rem auto; padding: 2rem; border-radius: 24px;">
+            <h2 style="margin-bottom: 1.5rem; text-align: center;">Tizimga Kirish</h2>
+            <div class="form-group">
+                <input type="password" id="adminPassword" placeholder="Parolni kiriting">
+            </div>
+            <button id="loginBtn" class="btn btn-primary" style="width: 100%;">Kirish</button>
+        </div>
+
+        <div id="dashboardSection" style="display: none;">
+            <div class="hero-text" style="margin-bottom: 2rem;">
+                <h1>Boshqaruv Paneli</h1>
+            </div>
+            <div class="products-grid">
+                <div class="upload-card">
+                    <h3>Yangi mahsulot</h3>
+                    <div class="form-group" style="margin-top: 1rem;">
+                        <div class="image-preview" id="imagePreview">
+                            <i class="fa-solid fa-cloud-arrow-up" style="font-size: 2rem; color: var(--text-muted);"></i>
+                        </div>
+                        <input type="file" id="productImage" style="display: none;" accept="image/*">
+                    </div>
+                    <div class="form-group">
+                        <label>Nomi</label>
+                        <input type="text" id="productName" placeholder="Masalan: 2 yillik ko'chat">
+                    </div>
+                    <div class="form-group">
+                        <label>Tavsif</label>
+                        <textarea id="productDesc" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Narxi</label>
+                        <input type="text" id="productPrice" placeholder="Masalan: 50,000 so'm">
+                    </div>
+                    <button id="addBtn" class="btn btn-primary" style="width: 100%;">Saqlash</button>
+                </div>
+
+                <div class="admin-list" id="adminProductList">
+                    <!-- Admin product cards here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="/admin.js"></script>
+</body>
 </html>

@@ -1,23 +1,22 @@
 <!DOCTYPE html>
 <html lang="uz">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LimonSavdo | Premium Limon Ko'chatlari va Mevalari</title>
-    <link rel="stylesheet" href="style.css">
+    <title>LimonSavdo | Premium Limon Ko'chatlari</title>
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome for icons -->
+    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
-
 <body>
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar" id="navbar">
         <div class="container nav-container">
-            <a href="#" class="logo">
+            <a href="/" class="logo">
                 <i class="fa-solid fa-lemon"></i> LimonSavdo
             </a>
             <ul class="nav-links">
@@ -25,129 +24,75 @@
                 <li><a href="#products">Mahsulotlar</a></li>
                 <li><a href="#expert">Maslahatchi</a></li>
                 <li><a href="#contact">Bog'lanish</a></li>
+                <li><a href="/admin.html" class="btn-admin"><i class="fa-solid fa-user-tie"></i></a></li>
             </ul>
-            <div class="mobile-menu-btn">
-                <i class="fa-solid fa-bars"></i>
+            <div class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fa-solid fa-bars-staggered"></i>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <header id="home" class="hero">
+    <section id="home" class="hero">
         <div class="container hero-content">
             <div class="hero-text">
-                <h1>Eng sifatli limonlar va ishonchli ko'chatlar</h1>
-                <p>Bizning limonlarimiz quyosh nuri va mehr bilan yetishtirilgan. O'z biznesingizni bizning sifatli
-                    ko'chatlarimiz bilan boshlang.</p>
+                <span class="badge">Eng sara navlar</span>
+                <h1>Tabiatning siri, <br><span style="color: var(--primary-light)">Limon</span> ifori</h1>
+                <p>Bizning ko'chatlarimiz quyosh nuri va mehr bilan yetishtirilgan. O'z biznesingizni bizning sifatli ko'chatlarimiz bilan boshlang.</p>
                 <div class="hero-buttons">
-                    <a href="#products" class="btn btn-primary">Xarid qilish <i class="fa-solid fa-arrow-right"></i></a>
-                    <a href="#expert" class="btn btn-secondary">Maslahat olish</a>
+                    <a href="#products" class="btn btn-primary">Mahsulotlarni ko'rish <i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="#expert" class="btn btn-secondary">Mutaxassis maslahati</a>
                 </div>
             </div>
             <div class="hero-image">
-                <div class="image-placeholder lemon-float">
-                    <i class="fa-regular fa-lemon" style="font-size: 150px; color: gold;"></i>
+                <div class="image-wrapper lemon-float">
+                    <img src="https://images.unsplash.com/photo-1590505671195-2c875939396e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Lemon Tree" class="main-img">
+                    <div class="floating-card glass">
+                        <i class="fa-solid fa-star"></i>
+                        <span>100% Organik</span>
+                    </div>
                 </div>
             </div>
         </div>
-    </header>
+    </section>
 
     <!-- Products Section -->
-    <section id="products" class="section products-section">
+    <section id="products" class="section">
         <div class="container">
             <h2 class="section-title">Bizning Mahsulotlar</h2>
             <div class="products-grid" id="productsList">
-                <!-- Products will be loaded dynamically or show defaults -->
-                <!-- Default contents kept as fallback or initial state if needed, but we will likely clear/overwrite them with JS if LocalStorage works -->
-                <!-- Product 1 -->
-                <div class="product-card">
-                    <div class="product-img">
-                        <i class="fa-solid fa-seedling"></i>
-                    </div>
-                    <div class="product-info">
-                        <h3>Limon Ko'chati (2 yillik)</h3>
-                        <p>Tez hosilga kiradigan, kasallikka chidamli nav.</p>
-
-                        <button class="btn btn-sm" onclick="showContactModal('Ko\'chat 2 yillik')">Aloqaga
-                            chiqish</button>
-                    </div>
-                </div>
-                <!-- Product 2 -->
-                <div class="product-card">
-                    <div class="product-img">
-                        <i class="fa-solid fa-tree"></i>
-                    </div>
-                    <div class="product-info">
-                        <h3>Limon Ko'chati (Katta)</h3>
-                        <p>Tayyor hosil berishga yaqin, baquvvat ko'chatlar.</p>
-
-                        <button class="btn btn-sm" onclick="showContactModal('Ko\'chat Katta')">Aloqaga chiqish</button>
-                    </div>
-                </div>
-                <!-- Product 3 -->
-                <div class="product-card">
-                    <div class="product-img">
-                        <i class="fa-solid fa-lemon"></i>
-                    </div>
-                    <div class="product-info">
-                        <h3>Sarxil Limon (1 kg)</h3>
-                        <p>Yupqa po'choq, ser suv va xushbo'y limonlar.</p>
-
-                        <button class="btn btn-sm" onclick="showContactModal('Limon 1kg')">Aloqaga chiqish</button>
-                    </div>
+                <!-- Loading State -->
+                <div class="loader">
+                    <i class="fa-solid fa-spinner fa-spin"></i>
+                    <p>Mahsulotlar yuklanmoqda...</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Modal -->
-    <div id="contactModal" class="modal-overlay" onclick="closeModal(event)">
-        <div class="modal">
-            <h3 style="color: var(--secondary-color); margin-bottom: 10px;">Sotib olish uchun bog'laning</h3>
-            <p>Quyidagi raqamlarga qo'ng'iroq qiling yoki Telegram orqali yozing:</p>
-
-            <div class="contact-methods">
-                <a href="tel:+998941706879" class="contact-btn btn-tel">
-                    <i class="fa-solid fa-phone"></i> +998 94 170 68 79
-                </a>
-                <a href="tel:+998931016879" class="contact-btn btn-tel">
-                    <i class="fa-solid fa-phone"></i> +998 93 101 68 79
-                </a>
-                <a href="https://t.me/limonsavdo_bot" target="_blank" class="contact-btn btn-tg">
-                    <i class="fa-brands fa-telegram"></i> Telegram orqali yozish
-                </a>
-            </div>
-            <button class="btn btn-sm" onclick="closeModal(event)"
-                style="margin-top: 20px; background: #eee; color: #333;">Yopish</button>
-        </div>
-    </div>
-    </div>
-    </section>
-
-    <!-- Expert System / Algorithm Section -->
+    <!-- Advisor Section -->
     <section id="expert" class="section expert-section">
         <div class="container">
-            <h2 class="section-title">Limon Maslahatchisi</h2>
-            <p class="section-subtitle">Limon yetishtirish bo'yicha savollaringiz bormi? Bizning aqlli tizimimiz sizga
-                yordam beradi.</p>
-
-            <div class="chat-interface">
-                <div class="chat-box" id="chatBox">
-                    <div class="message system-message">
-                        Assalomu alaykum! Men Limon Maslahatchisiman. Sizga qanday yordam bera olaman? Quyidagi
-                        mavzulardan birini tanlang yoki savolingizni yozing.
+            <div class="advisor-card glass">
+                <div class="advisor-header">
+                    <div class="advisor-info">
+                        <div class="advisor-avatar">
+                            <i class="fa-solid fa-robot"></i>
+                        </div>
+                        <div>
+                            <h3>Limon Maslahatchisi</h3>
+                            <p>AI yordamchisi</p>
+                        </div>
                     </div>
                 </div>
-                <div class="chat-options">
-                    <button class="chip" onclick="askQuestion('suv')">Sug'orish tartibi</button>
-                    <button class="chip" onclick="askQuestion('ogit')">O'g'itlash</button>
-                    <button class="chip" onclick="askQuestion('kasallik')">Kasalliklar</button>
-                    <button class="chip" onclick="askQuestion('harorat')">Harorat rejimi</button>
+                <div class="chat-box" id="chatBox">
+                    <div class="message system">
+                        Assalomu alaykum! Men Limon Maslahatchisiman. Sizga qanday yordam bera olaman?
+                    </div>
                 </div>
                 <div class="chat-input-area">
-                    <input type="text" id="userInput" placeholder="Yoki savolingizni yozing...">
-                    <button onclick="handleUserQuery()" class="btn-send"><i
-                            class="fa-solid fa-paper-plane"></i></button>
+                    <input type="text" id="userInput" placeholder="Savolingizni yozing...">
+                    <button id="sendBtn" class="btn-send"><i class="fa-solid fa-paper-plane"></i></button>
                 </div>
             </div>
         </div>
@@ -156,26 +101,24 @@
     <!-- Footer -->
     <footer id="contact" class="footer">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
+            <div class="footer-grid">
+                <div class="footer-brand">
                     <h2>LimonSavdo</h2>
-                    <p>Tabiiy va ishonchli mahsulotlar.</p>
+                    <p>Eng sifatli limon ko'chatlari va mevalari yetkazib beruvchisi.</p>
                 </div>
-                <div class="footer-links">
+                <div class="footer-contact">
                     <h3>Bog'lanish</h3>
                     <p><i class="fa-solid fa-phone"></i> +998 94 170 68 79</p>
                     <p><i class="fa-solid fa-phone"></i> +998 93 101 68 79</p>
                     <p><i class="fa-brands fa-telegram"></i> @limonsavdo_bot</p>
-                    <p><i class="fa-solid fa-location-dot"></i> Toshkent viloyati, Qibray</p>
                 </div>
             </div>
-            &copy; 2024 LimonSavdo. Barcha huquqlar himoyalangan. | <a href="admin.html"
-                style="color: inherit; opacity: 0.5;">Sotuvchi Kirish</a>
-        </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 LimonSavdo. Barcha huquqlar himoyalangan.</p>
+            </div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script type="module" src="/main.js"></script>
 </body>
-
 </html>
